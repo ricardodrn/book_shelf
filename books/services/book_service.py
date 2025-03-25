@@ -4,7 +4,7 @@ from books.repositories.book_repository import BookRepository
 
 
 class BoookService:
-    def __init__(self, repository: BookRepository):
+    def __init__(self, repository: BookRepository = None):
         self.repository = repository or BookRepository()
 
     def get_all_books(self) -> List[Book]:
@@ -13,8 +13,8 @@ class BoookService:
     def get_book_by_id(self, book_id: int) -> Optional[Book]:
         return self.repository.get_by_id(book_id)
     
-    def create_book(self, **kwargs) -> Book:
-        return self.repository.create(**kwargs)
+    def create_book(self, book_data: Dict[str, Any]) -> Book:
+        return self.repository.create(**book_data)
     
     def update_book(self, book_id: int, book_data: Dict[str, Any]) -> Optional[Book]:
         book = self.get_book_by_id(book_id)
